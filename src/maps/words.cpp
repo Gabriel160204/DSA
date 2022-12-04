@@ -1,3 +1,4 @@
+#include <cctype>
 #include <iostream>
 #include <string>
 #include <sstream>
@@ -36,6 +37,8 @@ int main() {
 	for (const char& ch : especial_chars) {
 		fullFile.erase(std::remove(fullFile.begin(), fullFile.end(), ch), fullFile.end());
 	}
+	std::transform(fullFile.begin(), fullFile.end(), fullFile.begin(),
+			[](unsigned char ch){ return std::tolower(ch);});
 	std::stringstream ss(fullFile);
 	while (ss >> word) {
 		it = mapWords.find(word);
